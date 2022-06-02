@@ -12,7 +12,7 @@ let auth = (req, res, next) => {
     User.findByToken(token, (err, user) =>{
         if(err) throw err;
         //유저가 없으면 인증 안해줌
-        if(!user) return res.json({ isAuth: false, error: true, err})
+        if(!user) return res.json({ isAuth: false, error: true})
 
         req.token = token;
         req.user = user;

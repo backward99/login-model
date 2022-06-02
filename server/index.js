@@ -6,13 +6,18 @@ const { auth } = require('./middleware/auth');
 const { User } = require('./models/User');
 const config = require('./config/key')
 const cookieParser = require('cookie-parser');
+const router = express.Router();
+const multer = require("multer");
+
+
 app.use(bodyParser.urlencoded({extended: true}));
 
 
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use('/api/json', require('./Json'));
 
-
+app.use('/uploads', express.static('uploads'));
 
 const mongoose = require('mongoose');
 const res = require('express/lib/response');
@@ -24,6 +29,8 @@ mongoose.connect(config.mongoURI , {
 
 app.get('/', (req,res)=> res.send('Hello World 그럼 여기서만 바꾸면 된다는거지? 이거는 live그거랑은 연동이 안되네'))
 
+
+app.get('/api/hello', (req, res)=>{res.send("안녕하세요 ~")})
 //post형식으로 회원가입? 
 app.post('/api/users/register', (req,res)=>{
     const user = new User(req.body)
@@ -91,6 +98,11 @@ app.get('/api/users/logout', auth, (req,res)=>{
             })
         })
 })
+
+
+
+
+
 
 
 app.listen(port, ()=> console.log(`Example app listening on port ${port}!`))
