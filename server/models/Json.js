@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 //데이터베이스 형식같은거임
 const jsonSchema = mongoose.Schema({
     writer: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     },
     title: {
@@ -15,23 +15,13 @@ const jsonSchema = mongoose.Schema({
     description : {
         type: String
     },
-    privacy : {
-        type: Number
-    },
     filePath : {
         type: String
     },
-    category : {
+    jsonText: {
         type: String
     },
-    views : {
-        type: Number,
-        default: 0
-    },
-    duration : {
-        type: String
-    },
-    thumbnail : {
+    realName: {
         type: String
     }
 },{timestamp: true})

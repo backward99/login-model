@@ -5,6 +5,7 @@ import MainImage from '../LandingPage/Sections/MainImage';
 import MovieInfo from './Sections/MovieInfo';
 import GridCards from '../commons/GridCards';
 import { Row } from 'antd';
+import Auth from '../../../hoc/auth';
 
 function MovieDetail(props) {
   const { movieId } = useParams();
@@ -77,4 +78,6 @@ function MovieDetail(props) {
     </div>
   )
 }
-export default MovieDetail;
+
+export default Auth(MovieDetail, null);
+// export default MovieDetail;
