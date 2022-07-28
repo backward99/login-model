@@ -24,7 +24,7 @@ const jsonSchema = mongoose.Schema({
     realName: {
         type: String
     }
-},{timestamp: true})
+},{timestamps: true})
 
 const Json = mongoose.model('Json', jsonSchema)
 

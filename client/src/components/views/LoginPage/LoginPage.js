@@ -1,7 +1,7 @@
 // import { response } from 'express';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { loginUser } from '../../../_actions/user_action';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Auth from '../../../hoc/auth';
 
@@ -33,7 +33,9 @@ function LoginPage() {
     dispatch(loginUser(body))
     .then(response => {
       if(response.payload.loginSuccess){
-        navigate('/')
+        window.localStorage.setItem('userId', response.payload.userId);
+        navigate('/land');
+        
       }else{
         alert('error');
       }
@@ -64,5 +66,5 @@ function LoginPage() {
 }
 
 
-export default Auth(LoginPage, false)
-// export default LoginPage;
+// export default Auth(LoginPage, false)
+export default LoginPage;

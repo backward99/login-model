@@ -23,7 +23,13 @@
 }
 
 .menu__container .ant-menu-item {
-  padding: 0px 5px;
+  display: inline;
+  padding-top: 20px;
+  /* padding: 19px 20px; */
+  /* margin-top: 60px; */
+  
+  /* padding: 0px 5px;
+  display: inline; */
 }
 
 .menu__container .ant-menu-submenu-title {
@@ -33,6 +39,7 @@
 .menu__container .ant-menu-item a,
 .menu__container .ant-menu-submenu-title a {
   padding: 10px 15px;
+  
 }
 
 .menu__container .ant-menu-horizontal {
@@ -41,10 +48,12 @@
 
 .menu__container .menu_left {
   float: left;
+  padding-top: 14px;
 }
 
 .menu__container .menu_rigth {
   float: right;
+  padding-top: 14px;
 }
 
 .menu__mobile-button {

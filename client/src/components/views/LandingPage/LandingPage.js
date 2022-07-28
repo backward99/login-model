@@ -4,7 +4,6 @@ import MainImage from './Sections/MainImage';
 import GridCards from '../commons/GridCards';
 import { Avatar, Col, Row } from 'antd';
 import { Descriptions } from 'antd';
-import TestJson from './TestJson.json';
 import Item from 'antd/lib/list/Item';
 import Auth from '../../../hoc/auth';
 import Meta from 'antd/lib/card/Meta';
@@ -12,66 +11,62 @@ import Meta from 'antd/lib/card/Meta';
 import axios from 'axios';
 import moment from 'moment';  
 function LandingPage() {
-
+  // Auth(null);
 
   const [Json, setJson] = useState([]);
 
-  const resultKeys = Object.keys(TestJson.data.attributes.last_analysis_results).map(x => x);
-  // const TestArray = TestJson.map()
-  const resultValue = Object.values(TestJson.data.attributes.last_analysis_results).map((entrie, idx) => {
-    // console.log(Object.keys(entrie), entrie, "idx", idx);
-    return (
-      <div key={idx}>
-        <Descriptions title={resultKeys[idx]} bordered>
-          <Descriptions.Item label="category">{entrie.category}</Descriptions.Item>
-          <Descriptions.Item label="result">{entrie.result}</Descriptions.Item>
-          <Descriptions.Item label="method">{entrie.method}</Descriptions.Item>
-          <Descriptions.Item label="engine_name">{entrie.engine_name}</Descriptions.Item>
-        </Descriptions>
-      </div>
-    )
-
-
-
-  });
-
-  // console.log("resultKeys", resultKeys);
 
   const [Movies, setMovies] = useState([]);
   const [MainMovieImage, setMainMovieImage] = useState(null);
   const [PageNum, setPageNum] = useState(0);
 
   useEffect(() => {
-    const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+    // const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
 
-    axios.get('api/json/getJsons')
+    const userVariables = {
+      _id : localStorage.getItem('userId')
+    }
+
+    // axios.get('api/json/getJsons')
+    // .then(response => {
+    //   if(response.data.success){
+    //     console.log(response.data);
+    //     setJson(response.data.jsons)
+    //   }else { 
+    //     alert('json 가져오기를 실패했습니다.');
+    //   }
+    // })
+
+    axios.post('api/json/getUserJsons', userVariables)
     .then(response => {
       if(response.data.success){
-        console.log(response.data);
+        console.log("response.data : ", response.data);
+        console.log("userVariables : ", userVariables);
+        console.log("userJson response.data : ", response.data)
         setJson(response.data.jsons)
       }else { 
         alert('json 가져오기를 실패했습니다.');
       }
     })
-    fetchFuc(endpoint);
+    // fetchFuc(endpoint);
 
   }, [])
 
-  const fetchFuc = (endpoint) => {
-    fetch(endpoint)
-      .then(response => response.json())
-      .then(response => {
-        setMovies([...Movies, ...response.results]);
-        setMainMovieImage(response.results[0]);
-        setPageNum(response.page)
-      });
-  }
+  // const fetchFuc = (endpoint) => {
+  //   fetch(endpoint)
+  //     .then(response => response.json())
+  //     .then(response => {
+  //       setMovies([...Movies, ...response.results]);
+  //       setMainMovieImage(response.results[0]);
+  //       setPageNum(response.page)
+  //     });
+  // }
 
-  const pageAddBtn = () => {
-    const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${PageNum + 1}`;
+  // const pageAddBtn = () => {
+  //   const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${PageNum + 1}`;
 
-    fetchFuc(endpoint);
-  }
+  //   fetchFuc(endpoint);
+  // }
   // console.log(MainMovieImage.background_path)
 
 
@@ -90,6 +85,7 @@ function LandingPage() {
             </Meta>
             <div> 제목 : {json.title}</div>
             <div> 파일 이름 : {json.realName}</div>
+            <div> 검사 결과 기록 : {json.description} </div>
             <div> 작성자 : {json.writer.name}</div>
 
             
@@ -158,5 +154,5 @@ function LandingPage() {
 }
 
 
-export default Auth(LandingPage, null);
-// export default LandingPage;
+// export default Auth(LandingPage, null);
+export default LandingPage;

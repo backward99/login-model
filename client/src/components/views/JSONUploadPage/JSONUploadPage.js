@@ -7,6 +7,7 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react'
 // import Dropzone from 'react-dropzone';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // const {TextArea} = Input;
 // const {Title} = Typography;
@@ -14,20 +15,6 @@ import { useSelector } from 'react-redux';
 function JSONUploadPage() {
 
     
-
-    // const upload = (files) => {
-    //     let formData = new FormData();
-    //     formData.append('files', files);
-    //     console.log('formData : ',formData);
-    //   }
-
-    // function onFileUpload(event) {
-    //     event.preventDefault();
-    //     let file = event.target.files[0];
-    //     upload(file);
-        
-    //   }
-
     const user = useSelector(state => state.user);
 
     const [JsonTitle, setJsonTitle] = useState("");
@@ -192,10 +179,10 @@ function JSONUploadPage() {
     // }
 
 
-
+    let navigate = useNavigate();
     const onSubmit = (e) => {
         e.preventDefault();
-
+        
         const variables = {
             writer: user.userData._id,
             title: JsonTitle,
@@ -206,7 +193,10 @@ function JSONUploadPage() {
         axios.post('/api/json/uploadJson', variables)
             .then(response => {
                 if (response.data.uploadJsonSuccess) {
+                    
+                  
                     console.log('uploadJson :', response.data);
+                    navigate('/land');
                 } else {
                     alert('데이터베이스에 파일 업로드 실패');
                 }
@@ -274,5 +264,5 @@ function JSONUploadPage() {
 }
 
 
-export default Auth(JSONUploadPage, true)
-// export default JSONUploadPage;
+// export default Auth(JSONUploadPage, true)
+export default JSONUploadPage;

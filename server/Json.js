@@ -5,6 +5,7 @@ const {Json} = require('./models/Json');
 var ffmpeg = require("fluent-ffmpeg");
 
 
+
 let storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "uploads/");
@@ -39,22 +40,34 @@ router.post('/uploadJson', (req, res) =>{
     const json = new Json(req.body);
 
     json.save((err,doc)=>{
-        if(err) return res.json({uploadJsonSuccess: false, err})
+        if(err) return res.json({uploadJsonSuccess: false, err});
+
         res.status(200).json({uploadJsonSuccess: true})
+
     })
 
 })
 
-router.get('/getJsons', (req, res) =>{
-    Json.find()
+// router.get('/getJsons', (req, res) =>{
+//     Json.find()
+//         .populate('writer')
+//         .exec((err,jsons)=>{
+//             if(err) return res.status(400).send(err);
+//             res.status(200).json({success : true, jsons})
+//         })
+// })
+
+
+router.post('/getUserJsons', (req, res) =>{
+    Json.find({ writer : req.body._id })
         .populate('writer')
         .exec((err,jsons)=>{
             if(err) return res.status(400).send(err);
+
+
             res.status(200).json({success : true, jsons})
         })
 })
-
-
 
 
 

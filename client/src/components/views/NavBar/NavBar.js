@@ -19,7 +19,7 @@ function NavBar() {
     
     <nav className="menu" style={{ position: 'sticky', zIndex: 1, width: '100%' }}>
       <div className="menu__logo">
-        <a href="/">Caps</a>
+        <a href="/land">Caps</a>
       </div>
       <div className="menu__container">
         <div className="menu_left">
