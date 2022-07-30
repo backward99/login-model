@@ -90,6 +90,7 @@ function LandingPage() {
 
             
             
+            
             <div>날짜 :  {moment(json.createdAt).format("MMM Do YY")} </div>
           </Col>
   })
