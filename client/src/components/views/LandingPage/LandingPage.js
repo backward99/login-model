@@ -10,6 +10,7 @@ import Meta from 'antd/lib/card/Meta';
 // import { json } from 'body-parser';
 import axios from 'axios';
 import moment from 'moment';  
+import {axiosInstance} from "../../Config";
 function LandingPage() {
   // Auth(null);
 
@@ -37,7 +38,8 @@ function LandingPage() {
     //   }
     // })
 
-    axios.post('api/json/getUserJsons', userVariables)
+    axiosInstance.post('api/json/getUserJsons', userVariables)
+    // axios.post('api/json/getUserJsons', userVariables)
     .then(response => {
       if(response.data.success){
         console.log("response.data : ", response.data);

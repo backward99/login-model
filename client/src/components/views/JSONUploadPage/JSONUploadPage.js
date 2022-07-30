@@ -2,8 +2,8 @@ import { Button, Form, Input, Descriptions } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import Title from 'antd/lib/skeleton/Title';
 import Auth from '../../../hoc/auth';
-// import { Axios } from 'axios';
 import axios from "axios";
+import { axiosInstance } from '../../../config';
 import React, { useEffect, useState } from 'react'
 // import Dropzone from 'react-dropzone';
 import { useSelector } from 'react-redux';
@@ -109,7 +109,9 @@ function JSONUploadPage() {
         formData.append("file", e.target.files[0]);
         console.log('formData : ', formData);
 
-        axios.post('/api/json/uploadfiles', formData, config)
+
+        axiosInstance.post('/api/json/uploadfiles', formData, config)
+        // axios.post('/api/json/uploadfiles', formData, config)
             .then(response => {
                 if (response.data.uploadSuccess) {
 
@@ -190,7 +192,9 @@ function JSONUploadPage() {
             filePath: FilePath,
             realName : RealName
         }
-        axios.post('/api/json/uploadJson', variables)
+
+        axiosInstance.post('/api/json/uploadJson', variables)
+        // axios.post('/api/json/uploadJson', variables)
             .then(response => {
                 if (response.data.uploadJsonSuccess) {
                     

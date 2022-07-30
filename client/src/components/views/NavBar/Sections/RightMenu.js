@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Menu } from 'antd';
-import axios from 'axios';
+// import axios from 'axios';
 import { USER_SERVER } from '../../../Config';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import {axiosInstance} from "../../../Config";
 
 function RightMenu() {
     let navigate = useNavigate();
@@ -22,7 +23,8 @@ function RightMenu() {
         //user.userData가 비어있음
         //이제 비어있지는 않은데 뭐가 잘못됐지
     const logoutHandler = () => {
-        axios.get(`${USER_SERVER}/logout`).then(response => {
+        // axios.get(`${USER_SERVER}/logout`).then(response => {
+            axiosInstance.get(`${USER_SERVER}/logout`).then(response => {
             if (response.status === 200) {
                 navigate('/login');
             } else {
