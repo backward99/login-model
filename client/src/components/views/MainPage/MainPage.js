@@ -7,7 +7,6 @@ import Item from 'antd/lib/list/Item';
 import Auth from '../../../hoc/auth';
 import Meta from 'antd/lib/card/Meta';
 // import { json } from 'body-parser';
-import axios from 'axios';
 import moment from 'moment';
 
 function MainPage() {
