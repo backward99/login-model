@@ -1,5 +1,5 @@
 import axios from "axios";  
-import { axiosInstance } from "../config";
+import { axiosInstance } from "../components/Config.js";
 import { LOGIN_USER, REGISTER_USER,  AUTH_USER,
     LOGOUT_USER, } from "./types";
     

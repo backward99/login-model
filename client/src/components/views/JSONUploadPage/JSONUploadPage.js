@@ -3,7 +3,7 @@ import TextArea from 'antd/lib/input/TextArea';
 import Title from 'antd/lib/skeleton/Title';
 import Auth from '../../../hoc/auth';
 import axios from "axios";
-import { axiosInstance } from '../../../config';
+import { axiosInstance } from '../../Config';
 import React, { useEffect, useState } from 'react'
 // import Dropzone from 'react-dropzone';
 import { useSelector } from 'react-redux';
